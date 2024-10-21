@@ -15,11 +15,13 @@ public class JohnMovement : MonoBehaviour
     private GameObject bulletPrefab;
     private float LastShoot;
     private int Health = 5;
+    private float Subiendo;
 
     void Start()//Coger el RigidBody del objeto al que esté asignado el script
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        Subiendo = gameObject.transform.position.y;
     }
 
     void Update()
@@ -31,6 +33,9 @@ public class JohnMovement : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         else if(horizontal > 0)
             transform.localScale = new Vector3(1, 1, 1);
+
+        //Detectar si el jugador está subiendo
+        
             
         
 
