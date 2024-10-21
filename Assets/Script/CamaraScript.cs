@@ -17,8 +17,12 @@ public class CamaraScript : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 position = transform.position;
-        position.x = player.transform.position.x;
-        transform.position = position;
+        if (player != null)
+        {
+            Vector3 position = transform.position;
+            position.x = player.transform.position.x;
+            transform.position = position;
+
+        }
     }
 }

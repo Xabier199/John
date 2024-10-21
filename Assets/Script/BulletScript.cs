@@ -11,12 +11,14 @@ public class BulletScript : MonoBehaviour
 
     private Vector2 direction;
 
+    public AudioClip Sound;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(Sound);
 
     }
 
@@ -34,5 +36,21 @@ public class BulletScript : MonoBehaviour
     private void DestroyBullet()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        JohnMovement john = collision.GetComponent<JohnMovement>();
+        GruntScript grunt = collision.GetComponent<GruntScript>();
+
+        if (john != null)
+        {
+            john.Hit();
+        }
+        if (grunt != null)
+        {
+            grunt.Hit();
+        }
+        DestroyBullet();
     }
 }

@@ -14,6 +14,7 @@ public class JohnMovement : MonoBehaviour
     [SerializeField]
     private GameObject bulletPrefab;
     private float LastShoot;
+    private int Health = 5;
 
     void Start()//Coger el RigidBody del objeto al que esté asignado el script
     {
@@ -39,8 +40,8 @@ public class JohnMovement : MonoBehaviour
         else 
             animator.SetBool("running", false);
 
-        Debug.DrawRay(transform.position, Vector2.down*0.1f, Color.red);
-        RaycastHit2D hitGround = Physics2D.Raycast(transform.position, Vector2.down, 0.1f);
+        Debug.DrawRay(transform.position, Vector2.down*0.15f, Color.red);
+        RaycastHit2D hitGround = Physics2D.Raycast(transform.position, Vector2.down, 0.15f);
         if (hitGround) grounded = true;
         else grounded = false;
 
@@ -79,6 +80,14 @@ public class JohnMovement : MonoBehaviour
         }
         GameObject bullet = Instantiate(bulletPrefab, transform.position+direction*0.1f, Quaternion.identity);
         bullet.GetComponent<BulletScript>().SetDirection(direction);
+
+    }
+
+
+    public void Hit()
+    {
+        Health = Health - 1;
+        if (Health == 0) Destroy(gameObject);
 
     }
 }
